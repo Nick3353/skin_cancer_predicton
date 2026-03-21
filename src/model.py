@@ -2,16 +2,16 @@ import torch
 import torch.nn as nn
 from torchvision import models
 
-# ─────────────────────────────────────────────────────────────
+
 # Configuration
-# ─────────────────────────────────────────────────────────────
+
 NUM_CLASSES_MULTI  = 9   # 9-class task
 NUM_CLASSES_BINARY = 2   # binary task (malignant vs benign)
 
 
-# ─────────────────────────────────────────────────────────────
+
 # 1. ResNet-50
-# ─────────────────────────────────────────────────────────────
+
 def build_resnet50(num_classes: int = 9, freeze_backbone: bool = True):
     """
     ResNet-50 with pretrained ImageNet weights.
@@ -45,9 +45,9 @@ def build_resnet50(num_classes: int = 9, freeze_backbone: bool = True):
     return model
 
 
-# ─────────────────────────────────────────────────────────────
+
 # 2. EfficientNet-B4
-# ─────────────────────────────────────────────────────────────
+
 def build_efficientnet_b4(num_classes: int = 9, freeze_backbone: bool = True):
     """
     EfficientNet-B4 with pretrained ImageNet weights.
@@ -74,9 +74,9 @@ def build_efficientnet_b4(num_classes: int = 9, freeze_backbone: bool = True):
     return model
 
 
-# ─────────────────────────────────────────────────────────────
+
 # 3. MobileNet-V3 Large
-# ─────────────────────────────────────────────────────────────
+
 def build_mobilenet_v3(num_classes: int = 9, freeze_backbone: bool = True):
     """
     MobileNet-V3-Large with pretrained ImageNet weights.
@@ -103,9 +103,9 @@ def build_mobilenet_v3(num_classes: int = 9, freeze_backbone: bool = True):
     return model
 
 
-# ─────────────────────────────────────────────────────────────
+
 # 4. Unified build function
-# ─────────────────────────────────────────────────────────────
+
 def build_model(
     architecture   : str  = 'resnet50',
     num_classes    : int  = 9,
@@ -137,9 +137,9 @@ def build_model(
         )
 
 
-# ─────────────────────────────────────────────────────────────
+
 # 5. Helper — count trainable parameters
-# ─────────────────────────────────────────────────────────────
+
 def count_parameters(model: nn.Module):
     """Prints total and trainable parameter counts."""
     total     = sum(p.numel() for p in model.parameters())

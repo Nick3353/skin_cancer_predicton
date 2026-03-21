@@ -16,9 +16,9 @@ from src.model import build_model
 from src.dataloader import get_dataloaders
 
 
-# ─────────────────────────────────────────────────────────────
+
 # Class names in label order (0-8)
-# ─────────────────────────────────────────────────────────────
+ 
 CLASS_NAMES = [
     'actinic keratosis',       # 0 MALIGNANT
     'basal cell carcinoma',    # 1 MALIGNANT
@@ -35,9 +35,9 @@ SHORT_NAMES = ['AK','BCC','DF','MEL','NV','PBK','SK','SCC','VASC']
 MALIGNANT_IDX = {0, 1, 3, 7}
 
 
-# ─────────────────────────────────────────────────────────────
+
 # 1. Load model from checkpoint
-# ─────────────────────────────────────────────────────────────
+
 def load_model(checkpoint_path: str, device: torch.device):
     checkpoint  = torch.load(checkpoint_path, map_location=device)
     architecture = checkpoint['architecture']
@@ -55,9 +55,9 @@ def load_model(checkpoint_path: str, device: torch.device):
     return model, architecture
 
 
-# ─────────────────────────────────────────────────────────────
+
 # 2. Run inference on entire test set
-# ─────────────────────────────────────────────────────────────
+
 def get_predictions(model, test_loader, device):
     all_labels  = []
     all_preds   = []
@@ -81,9 +81,9 @@ def get_predictions(model, test_loader, device):
     )
 
 
-# ─────────────────────────────────────────────────────────────
+
 # 3. Confusion matrix
-# ─────────────────────────────────────────────────────────────
+
 def plot_confusion_matrix(labels, preds, save_path):
     cm = confusion_matrix(labels, preds)
 
@@ -124,9 +124,9 @@ def plot_confusion_matrix(labels, preds, save_path):
     return cm
 
 
-# ─────────────────────────────────────────────────────────────
+
 # 4. ROC curves
-# ─────────────────────────────────────────────────────────────
+
 def plot_roc_curves(labels, probs, save_path):
     n_classes = 9
     labels_bin = label_binarize(labels, classes=range(n_classes))
@@ -166,10 +166,8 @@ def plot_roc_curves(labels, probs, save_path):
     print(f"Saved: {save_path}")
     return aucs, macro_auc
 
-
-# ─────────────────────────────────────────────────────────────
 # 5. Classification report
-# ─────────────────────────────────────────────────────────────
+
 def print_classification_report(labels, preds, save_path):
     report = classification_report(
         labels, preds,
@@ -189,9 +187,8 @@ def print_classification_report(labels, preds, save_path):
     return report
 
 
-# ─────────────────────────────────────────────────────────────
 # 6. Per-class sensitivity (recall) and specificity
-# ─────────────────────────────────────────────────────────────
+
 def print_sensitivity_specificity(labels, preds, aucs):
     cm = confusion_matrix(labels, preds)
     print("\nPer-class sensitivity & specificity:")

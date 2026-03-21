@@ -10,9 +10,9 @@ from src.model import build_model
 from src.dataloader import get_dataloaders
 
 
-# ─────────────────────────────────────────────────────────────
+
 # 1. Loss function with class weights
-# ─────────────────────────────────────────────────────────────
+
 def get_loss_fn(task: str = 'multiclass', device: torch.device = None, outputs_dir: str = 'outputs'):
     if task == 'multiclass':
         weights = np.load(os.path.join(outputs_dir, 'multiclass_class_weights.npy'))
@@ -23,9 +23,9 @@ def get_loss_fn(task: str = 'multiclass', device: torch.device = None, outputs_d
     return nn.CrossEntropyLoss(weight=weights)
 
 
-# ─────────────────────────────────────────────────────────────
+
 # 2. One epoch of training
-# ─────────────────────────────────────────────────────────────
+
 def train_one_epoch(model, loader, loss_fn, optimizer, device):
     model.train()
 

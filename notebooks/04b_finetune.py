@@ -19,9 +19,9 @@ from src.model import build_model
 from src.dataloader import get_dataloaders
 
 
-# ─────────────────────────────────────────────────────────────
+
 # Plot helper
-# ─────────────────────────────────────────────────────────────
+ 
 def plot_history(history, architecture, save_path):
     fig, axes = plt.subplots(1, 2, figsize=(14, 5))
     epochs = range(1, len(history['train_loss']) + 1)
@@ -49,7 +49,7 @@ def plot_history(history, architecture, save_path):
     print(f"Saved: {save_path}")
 
 
-# ─────────────────────────────────────────────────────────────
+ 
 # Stage 2 training function
 # ─────────────────────────────────────────────────────────────
 def finetune(
@@ -214,13 +214,13 @@ def finetune(
     return history, stage2_ckpt
 
 
-# ─────────────────────────────────────────────────────────────
+
 # Main
-# ─────────────────────────────────────────────────────────────
+
 def main():
     # Start with MobileNet — fastest and already best performer
     # Then ResNet-50, then EfficientNet
-    architectures = [ 'efficientnet_b4']
+    architectures = [ 'MobileNet_v3','ResNet-50','efficientnet_b4']
 
     for arch in architectures:
         print(f"\n{'='*60}")

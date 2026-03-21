@@ -7,9 +7,9 @@ from PIL import Image
 from torchvision import transforms
 
 
-# ─────────────────────────────────────────────────────────────
+
 # Grad-CAM implementation
-# ─────────────────────────────────────────────────────────────
+
 class GradCAM:
     """
     Gradient-weighted Class Activation Mapping.
@@ -92,9 +92,9 @@ class GradCAM:
         return heatmap, class_idx, pred_prob
 
 
-# ─────────────────────────────────────────────────────────────
+
 # Get the correct target layer per architecture
-# ─────────────────────────────────────────────────────────────
+
 def get_target_layer(model, architecture: str):
     """
     Returns the last convolutional layer for each architecture.
@@ -111,9 +111,9 @@ def get_target_layer(model, architecture: str):
         raise ValueError(f"Unknown architecture: {architecture}")
 
 
-# ─────────────────────────────────────────────────────────────
+
 # Overlay heatmap on image
-# ─────────────────────────────────────────────────────────────
+
 def overlay_heatmap(image_np, heatmap, alpha=0.5):
     """
     Blends a Grad-CAM heatmap over the original image.
@@ -132,9 +132,9 @@ def overlay_heatmap(image_np, heatmap, alpha=0.5):
     return np.clip(blended, 0, 1)
 
 
-# ─────────────────────────────────────────────────────────────
+
 # Visualise Grad-CAM for a batch of test images
-# ─────────────────────────────────────────────────────────────
+
 def visualize_gradcam(
     model,
     architecture,

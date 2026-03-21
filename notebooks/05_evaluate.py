@@ -26,13 +26,13 @@ def main():
     print(f"Device: {device}")
     print("=" * 60)
 
-    # ── Load best model ───────────────────────────────────────
+    #  Load best model  
     ckpt_path = os.path.join(
         CKPT_DIR, 'best_mobilenet_v3_multiclass_stage2.pth'
     )
     model, architecture = load_model(ckpt_path, device)
 
-    # ── Test dataloader ───────────────────────────────────────
+    #Test dataloader 
     _, _, test_loader = get_dataloaders(
         train_csv = os.path.join(BASE_DIR, 'outputs', 'train.csv'),
         val_csv   = os.path.join(BASE_DIR, 'outputs', 'val.csv'),
@@ -41,7 +41,7 @@ def main():
         batch_size= 16,
     )
 
-    # ── Get predictions ───────────────────────────────────────
+    #  Get predictions  
     print("\nRunning inference on test set...")
     labels, preds, probs = get_predictions(model, test_loader, device)
     print(f"Test samples: {len(labels)}")
@@ -49,14 +49,14 @@ def main():
     print(f"Test accuracy: {acc:.4f} ({acc*100:.1f}%)")
     print("=" * 60)
 
-    # ── Confusion matrix ──────────────────────────────────────
+    #   Confusion matrix 
     print("\nGenerating confusion matrix...")
     plot_confusion_matrix(
         labels, preds,
         os.path.join(EVAL_DIR, 'confusion_matrix.png')
     )
 
-    # ── ROC curves ────────────────────────────────────────────
+    #   ROC curves  
     print("\nGenerating ROC curves...")
     aucs, macro_auc = plot_roc_curves(
         labels, probs,
@@ -64,16 +64,16 @@ def main():
     )
     print(f"Macro AUC: {macro_auc:.4f}")
 
-    # ── Classification report ─────────────────────────────────
+    #  Classification report  
     print_classification_report(
         labels, preds,
         os.path.join(EVAL_DIR, 'classification_report.txt')
     )
 
-    # ── Sensitivity & specificity ─────────────────────────────
+    #  Sensitivity & specificity 
     print_sensitivity_specificity(labels, preds, aucs)
 
-    # ── Grad-CAM ──────────────────────────────────────────────
+    #   Grad-CAM  
     print("\nGenerating Grad-CAM heatmaps...")
     visualize_gradcam(
         model        = model,

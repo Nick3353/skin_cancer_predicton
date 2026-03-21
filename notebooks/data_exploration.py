@@ -7,12 +7,12 @@ from PIL import Image
 from sklearn.utils.class_weight import compute_class_weight
 from sklearn.model_selection import train_test_split
 
-# ── Root of your dataset ──────────────────────────────────────
+#  Root of your dataset 
 DATA_DIR   = Path('dataset_ISIC')
 TRAIN_DIR  = DATA_DIR / 'Train'
 TEST_DIR   = DATA_DIR / 'Test'
 
-# ── Which classes are malignant ───────────────────────────────
+#   Which classes are malignant  
 MALIGNANT_CLASSES = {
     'melanoma',
     'basal cell carcinoma',
@@ -29,7 +29,7 @@ def scan_folder(root: Path) -> pd.DataFrame:
         imgs = list(folder.glob('*.jpg')) + list(folder.glob('*.png'))
         for img_path in imgs:
             records.append({
-                'image_path': str(img_path.resolve()),  # ← .resolve() makes it absolute
+                'image_path': str(img_path.resolve()),  #    resolve() makes it absolute
                 'class_name': folder.name,
             })
 
@@ -72,17 +72,7 @@ for name, idx in class_to_idx.items():
 train_full = add_labels(train_full, class_to_idx)
 test_df    = add_labels(test_df,    class_to_idx)
  
-''' Expected output:
  
-0: actinic keratosis          [MALIGNANT]
-1: basal cell carcinoma       [MALIGNANT]
-2: dermatofibroma             [benign  ]
-3: melanoma                   [MALIGNANT]
-4: nevus                      [benign  ]
-5: pigmented benign keratosis [benign  ]
-6: seborrheic keratosis       [benign  ]
-7: squamous cell carcinoma    [MALIGNANT]
-8: vascular lesion            [benign  ]  '''
 
 
 # Stratified split — keeps class proportions identical in train and val
@@ -90,7 +80,7 @@ train_df, val_df = train_test_split(
     train_full,
     test_size=0.2,
     random_state=42,
-    stratify=train_full['label']   # ← crucial: split per class, not randomly
+    stratify=train_full['label']   #     crucial: split per class, not randomly
 )
 
 train_df = train_df.reset_index(drop=True)
@@ -103,15 +93,7 @@ print(f"  Test  : {len(test_df)} images")
 print(f"  Total : {len(train_df) + len(val_df) + len(test_df)} images")
 
 
-'''
-Expected output:
-
-Final split:
-  Train : ~1520 images
-  Val   :  ~380 images
-  Test  :  ~457 images
-  Total : ~2357 images
-  '''
+ 
 
 print("\nImages per class across splits:\n")
 print(f"{'Class':<35} {'Train':>6} {'Val':>6} {'Test':>6} {'Total':>7}")
@@ -128,29 +110,11 @@ print("-" * 60)
 print(f"{'TOTAL':<35} {len(train_df):>6} {len(val_df):>6} {len(test_df):>6} {len(train_df)+len(val_df)+len(test_df):>7}")
 print("\n* = malignant class")
  
-'''
- Expected output:
  
-Class                               Train    Val   Test   Total
-------------------------------------------------------------
-actinic keratosis *                   261     66     --     327
-basal cell carcinoma *                261     66     --     327
-dermatofibroma                         76     19     --      95
-melanoma *                            304     76     --     380
-nevus                                 285     72     --     357
-pigmented benign keratosis            369     93     --     462
-seborrheic keratosis                  261     66     --     327
-squamous cell carcinoma *             261     66     --     327
-vascular lesion                       113     29     --     142
-------------------------------------------------------------
-TOTAL                                1520    380    457    2357
-
-'''
-
 binary_weights = compute_class_weight(
     class_weight='balanced',
     classes=np.array([0, 1]),
-    y=train_df['is_malignant'].values   # ← computed on TRAIN only, never test
+    y=train_df['is_malignant'].values   #   computed on TRAIN only, never test
 )
 
 multiclass_weights = compute_class_weight(

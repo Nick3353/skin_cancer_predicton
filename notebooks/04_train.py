@@ -1,12 +1,12 @@
 import sys, os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-# ── ADD THESE 4 LINES ─────────────────────────────────────────
+ 
 BASE_DIR  = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 TRAIN_CSV = os.path.join(BASE_DIR, 'outputs', 'train.csv')
 VAL_CSV   = os.path.join(BASE_DIR, 'outputs', 'val.csv')
 CKPT_DIR  = os.path.join(BASE_DIR, 'outputs', 'checkpoints')
-# ─────────────────────────────────────────────────────────────
+ 
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -62,11 +62,11 @@ def main():
             learning_rate   = 1e-3,
             patience        = 5,
             freeze_backbone = True,
-            # ── ADD THESE 3 LINES ────────────────────────────
+       
             train_csv       = TRAIN_CSV,
             val_csv         = VAL_CSV,
             checkpoint_dir  = CKPT_DIR,
-            # ─────────────────────────────────────────────────
+           
         )
 
         save_dir = os.path.join(BASE_DIR, 'outputs')
