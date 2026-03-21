@@ -13,7 +13,7 @@ and a real-time Flask web application.
 
 ## Demo
 
-![Grad-CAM](assets/webapp_screenshoot.png)
+![Grad-CAM](assets/webapp_screenshot.png)
 ![Grad-CAM](assets/gradcam_samples.png)
 ---
 
@@ -200,7 +200,7 @@ python webapp/app.py
 ![ROC Curves](assets/roc_curves.png)
 
 ### Training Curves
-![ROC Curves](assets/training_curves_mobilenet_v3)
+![ Moblienet_training_curves](assets/training_curves_mobilenet_v3)
 
 ---
 
