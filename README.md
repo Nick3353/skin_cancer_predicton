@@ -13,7 +13,7 @@ and a real-time Flask web application.
 
 ## Demo
 
-[INSERT SCREENSHOT OF YOUR WEB APP HERE]
+![Grad-CAM](assets/webapp_screenshoot.png)
 ![Grad-CAM](assets/gradcam_samples.png)
 ---
 
@@ -105,7 +105,7 @@ Stage 2 — Full fine-tuning (10 epochs, lr=1e-5)
 Gradient-weighted Class Activation Mapping highlights which 
 regions of the dermoscopy image most influenced the prediction.
 
-[INSERT GRADCAM GRID IMAGE HERE — outputs/evaluation/gradcam_samples.png]
+![Grad-CAM](assets/gradcam_samples.png)
 
 ---
 
