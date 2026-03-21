@@ -200,7 +200,7 @@ python webapp/app.py
 ![ROC Curves](assets/roc_curves.png)
 
 ### Training Curves
-![ Moblienet_training_curves](assets/training_curves_mobilenet_v3)
+![ Moblienet_training_curves](assets/training_curves_mobilenet_v3.png)
 
 ---
 
